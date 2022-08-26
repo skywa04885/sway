@@ -1,0 +1,196 @@
+
+#################
+# Theming 
+#################
+
+
+# Client Windows
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+# Client Background
+client.background       #F8F8F2
+
+# Use pango font.
+font pango:FontAwesome 8
+
+# Wallpaper.
+output "*" bg /usr/share/wallpapers/arch.png fill
+
+#################
+# Variables 
+#################
+
+# Lock command (swaylock)
+set $lock_command "swaylock -f -i /usr/share/wallpapers/arch.png"
+
+# Sets the primary button to Windows Button.
+set $mod Mod4
+
+#################
+# Keybindings 
+#################
+
+# Screenshots.
+bindsym --to-code Print exec 'grim -g "$(slurp)" ~/Screenshots/$(date +%Hh_%Mm_%Ss_%d_%B_%Y).png'
+bindsym --to-code $mod+Print exec 'grim -g "$(slurp)" - | swappy -f -'
+
+# Use the Mouse+$mod to drag floating windows.
+floating_modifier $mod
+
+# Start a terminal.
+bindsym $mod+Return exec "kitty"
+
+# Kill focused window.
+bindsym $mod+Shift+q kill
+
+# Opens Wofi (DMENU Alternative)
+bindsym $mod+d exec "wofi --show drun --allow-images --insensitive"
+
+# Change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Change focus (arrow keys)
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen toggle
+
+# Change container layout.
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Toggle tiling / floating.
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling and floating windows.
+bindsym $mod+space focus mode_toggle
+
+# Focus the parent container.
+bindsym $mod+a focus parent
+
+# Reload config
+bindsym $mod+Shift+c reload
+
+# Exit Sway
+bindsym $mod+Shift+e exec "swaymsg exit"
+
+# Lock screen (execute the lock command)
+bindsym $mod+Shift+l exec $lock_command
+
+#################
+# Idle 
+#################
+
+#################
+# Workspaces 
+#################
+
+# Workspace Names.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Shortucts for brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +5%"
+bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 5%-"
+
+# Media keys
+bindsym XF86AudioPlay exec --no-startup-id "playerctl play-pause"
+bindsym XF86AudioPause exec --no-startup-id "playerctl pley-pause"
+bindsym XF86AudioNext exec --no-startup-id "playerctl next"
+bindsym XF86AudioPrev exec --no-startup-id "playerctl previous"
+
+# Volume adjustments
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86AudioMicMute exec --no-startup-id "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+
+#################
+# Bar
+#################
+
+bar {
+  # Bar at top of screen.
+  position top
+
+  # Use waybar instead of swaybar.
+  swaybar_command waybar
+}
+
+#################
+# Modes
+#################
+
+# Redshift mode
+
+# Power mode
+set $mode_power Set power: (s) systemctl suspend, (p) systemctl poweroff, (h) systemctl hibernate, (escape) back
+bindsym $mod+Shift+p mode "$mode_power"
+mode "$mode_power" {
+  # Power options
+  bindsym s exec "systemctl suspend"
+  bindsym p exec "systemctl poweroff"
+  bindsym h exec "systemctl hibernate"
+
+  # Exit to default.
+  bindsym Escape mode "default"
+}
+
+#################
+# Input
+#################
+
+input type:touchpad {
+  tap enabled
+  natural_scroll enable
+}
+
+#################
+# Autostart
+#################
+
+exec --no-startup-id "blueman-applet"
+exec --no-startup-id "mako"
+exec "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway"
