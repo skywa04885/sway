@@ -4,28 +4,30 @@
 #################
 
 
-# Client Windows
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused          #6272A4 #282A36 #F8F8F2 #6272A4   #282A36
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 # Client Background
-client.background       #F8F8F2
+client.background       #282A36
 
 # Use pango font.
 font pango:FontAwesome 8
 
 # Wallpaper.
-output "*" bg /usr/share/wallpapers/arch.png fill
+output "*" bg /usr/share/wallpapers/windows11.png fill
+
+# Window gaps
+gaps inner 8
 
 #################
 # Variables 
 #################
 
 # Lock command (swaylock)
-set $lock_command "swaylock -f -i /usr/share/wallpapers/arch.png"
+set $lock_command "swaylock -f -i /usr/share/wallpapers/flowers.jpg"
 
 # Sets the primary button to Windows Button.
 set $mod Mod4
@@ -87,6 +89,10 @@ bindsym $mod+Shift+e exec "swaymsg exit"
 
 # Lock screen (execute the lock command)
 bindsym $mod+Shift+l exec $lock_command
+
+# Move workspaces around to monitors.
+bindsym $mod+Ctrl+greater move workspace to output right
+bindsym $mod+Ctrl+less move workspace to output left
 
 #################
 # Idle 
