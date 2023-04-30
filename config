@@ -1,11 +1,12 @@
+include /etc/sway/config.d/*
 
 #################
 # Theming 
 #################
 
 
-client.focused          #6272A4 #282A36 #F8F8F2 #6272A4   #282A36
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.focused          #F8F8F2 #282A36 #F8F8F2 #F8F8F2   #282A36
+client.focused_inactive #44475A #282A36 #F8F8F2 #44475A   #282A36
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
@@ -17,7 +18,7 @@ client.background       #282A36
 font pango:FontAwesome 8
 
 # Wallpaper.
-output "*" bg /usr/share/wallpapers/windows11.png fill
+output "*" bg /usr/share/backgrounds/wallpaper2.png fill
 
 # Window gaps
 gaps inner 8
@@ -27,7 +28,7 @@ gaps inner 8
 #################
 
 # Lock command (swaylock)
-set $lock_command "swaylock -f -i /usr/share/wallpapers/flowers.jpg"
+set $lock_command "swaylock -f -i /usr/share/backgrounds/wallpaper2.png"
 
 # Sets the primary button to Windows Button.
 set $mod Mod4
@@ -44,13 +45,13 @@ bindsym --to-code $mod+Print exec 'grim -g "$(slurp)" - | swappy -f -'
 floating_modifier $mod
 
 # Start a terminal.
-bindsym $mod+Return exec "kitty"
+bindsym $mod+Return exec "alacritty --config-file=/home/luke/.config/alacritty/alacritty.yml"
 
 # Kill focused window.
 bindsym $mod+Shift+q kill
 
 # Opens Wofi (DMENU Alternative)
-bindsym $mod+d exec "wofi --show drun --allow-images --insensitive"
+bindsym $mod+d exec "bemenu-run --list 16 --margin 8 --border 4 --no-overlap --scrollbar always --bdr '#44475a' --tb '#282A36 ' --tf '#8ad4e3' --fb '#282a36' --ff '#BFBFBF' --nb '#282a36' --nf '#BFBFBF' --hb '#44475a' --hf '#81eeff' --sb '#44475a' --sf '#81eeff' --scb '#282a36' --scf '#8ad4e3 '"
 
 # Change focus
 bindsym $mod+h focus left
@@ -98,6 +99,10 @@ bindsym $mod+less move workspace to output left
 # Idle 
 #################
 
+input "type:touchpad" {
+  tap enabled
+}
+
 #################
 # Workspaces 
 #################
@@ -137,6 +142,9 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
+# Other shortcuts
+bindsym $mod+b exec --no-startup-id "qutebrowser"
+
 # Shortucts for brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id "brightnessctl set +5%"
 bindsym XF86MonBrightnessDown exec --no-startup-id "brightnessctl set 5%-"
@@ -157,12 +165,11 @@ bindsym XF86AudioMicMute exec --no-startup-id "pactl set-source-mute @DEFAULT_SO
 # Bar
 #################
 
-bar {
-  # Bar at top of screen.
-  position top
 
-  # Use waybar instead of swaybar.
-  swaybar_command waybar
+bar {
+    position top
+
+    bar swaybar_command waybar
 }
 
 #################
@@ -185,18 +192,11 @@ mode "$mode_power" {
 }
 
 #################
-# Input
-#################
-
-input type:touchpad {
-  tap enabled
-  natural_scroll enable
-}
-
-#################
 # Autostart
 #################
 
-exec --no-startup-id "blueman-applet"
+# exec --no-startup-id "blueman-applet"
 exec --no-startup-id "mako"
-exec "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway"
+exec --no-startup-id "wlsunset -l 52.377956 -L 4.897070"
+exec --no-startup-id "wl-paste -t text --watch clipman store --no-persist"
+
