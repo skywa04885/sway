@@ -5,20 +5,22 @@ include /etc/sway/config.d/*
 #################
 
 
-client.focused          #F8F8F2 #282A36 #F8F8F2 #F8F8F2   #282A36
-client.focused_inactive #44475A #282A36 #F8F8F2 #44475A   #282A36
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          #00FF00 #223422 #00FF00 #00FF00   #223422
+client.focused_inactive #223422 #223422 #00FF00 #223422   #223422
+client.unfocused        #223422 #223422 #00AA00 #223422   #223422
+client.urgent           #223422 #FF0000 #00FF00 #FF0000   #FF0000
+client.placeholder      #223422 #223422 #00FF00 #223422   #223422
 
 # Client Background
-client.background       #282A36
+client.background       #223322
 
 # Use pango font.
 font pango:FontAwesome 8
 
 # Wallpaper.
-output "*" bg /usr/share/backgrounds/wallpaper2.png fill
+output "*" bg #112211 solid_color
+output eDP-1 pos 1920 0 res 1920x1080
+output HDMI-A-1 pos 0 0 res 1920x1080
 
 # Window gaps
 gaps inner 8
@@ -28,7 +30,7 @@ gaps inner 8
 #################
 
 # Lock command (swaylock)
-set $lock_command "swaylock -f -i /usr/share/backgrounds/wallpaper2.png"
+set $lock_command "swaylock -f --color 223422"
 
 # Sets the primary button to Windows Button.
 set $mod Mod4
@@ -51,7 +53,7 @@ bindsym $mod+Return exec "alacritty --config-file=/home/luke/.config/alacritty/a
 bindsym $mod+Shift+q kill
 
 # Opens Wofi (DMENU Alternative)
-bindsym $mod+d exec "bemenu-run --list 16 --margin 8 --border 4 --no-overlap --scrollbar always --bdr '#44475a' --tb '#282A36 ' --tf '#8ad4e3' --fb '#282a36' --ff '#BFBFBF' --nb '#282a36' --nf '#BFBFBF' --hb '#44475a' --hf '#81eeff' --sb '#44475a' --sf '#81eeff' --scb '#282a36' --scf '#8ad4e3 '"
+bindsym $mod+d exec "bemenu-run --list 16 --margin 8 --border 4 --no-overlap --scrollbar always --bdr '#00AA00' --tb '#223422 ' --tf '#00FF00' --fb '#223422' --ff '#00FF00' --nb '#223422' --nf '#BFBFBF' --hb '#266822' --hf '#00FF00' --sb '#226622' --sf '#00FF00' --scb '#223422' --scf '#00FF00 '"
 
 # Change focus
 bindsym $mod+h focus left
